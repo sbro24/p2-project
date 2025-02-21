@@ -1,2 +1,0 @@
-test
-// @sbro24, her skal det fixed

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Metrics - Financial Management</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="assets/js/key-metrics.js" defer></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Financial Management</h1>
+        <p>Manage your budget efficiently</p>
+    </header>
+
+    <!-- Navigation -->
+    <div class="navbar">
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="key-metrics.html">Key metrics</a></li>
+                <li><a href="budget-vs-actual.html">Budget follow up</a></li>
+                <li><a href="forecast.html">Forecast</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="metrics">
+            <div class="card">
+                <h2>Revenue</h2>
+                <p id="revenue">$0</p>
+            </div>
+            <div class="card">
+                <h2>Expenses</h2>
+                <p id="expenses">$0</p>
+            </div>
+            <div class="card">
+                <h2>Profit</h2>
+                <p id="profit">$0</p>
+            </div>
+            <div class="card">
+                <h2>Cash Flow</h2>
+                <p id="cash-flow">$0</p>
+            </div>
+        </section>
+
+        <!-- Chart Section -->
+        <section class="chart-container">
+            <h2>Financial Performance</h2>
+            <canvas id="financialChart"></canvas>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Financial Management. All rights reserved.</p>
+    </footer>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/navigation.js" defer></script>
+    <script src="assets/js/key-metrics.js" defer></script>
+</body>
+
+</html>
