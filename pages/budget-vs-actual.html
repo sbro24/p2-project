@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget vs Actual - Financial Management</title>
     <link rel="stylesheet" href="../assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="../assets/js/budgetMockup.js"></script>
 </head>
 
 <body>
@@ -49,31 +51,42 @@
                     <tbody>
                         <tr>
                             <td>Sales</td>
-                            <td>500,000 DKK</td>
-                            <td>480,000 DKK</td>
-                            <td>-20,000 DKK</td>
+                            <td>180,000 DKK</td>
+                            <td>180,000 DKK</td>
+                            <td>-2,600 DKK</td>
                         </tr>
-                        <tr>
-                            <td>Marketing</td>
-                            <td>50,000 DKK</td>
-                            <td>60,000 DKK</td>
-                            <td>+10,000 DKK</td>
-                        </tr>
-                        <tr>
-                            <td>Payroll</td>
-                            <td>100,000 DKK</td>
-                            <td>95,000 DKK</td>
-                            <td>-5,000 DKK</td>
-                        </tr>
-                        <!-- Add more rows as needed -->
                     </tbody>
                 </table>
                 
+                <p> Here is the difference between actual sales and sales budget pr. month</p>
+                
                 <!-- Graphical representation (optional) -->
-                <div class="budget-graph">
-                    <p>Visualize the budget vs actual data in a graph.</p>
-                    <!-- Graph or chart can be added here using libraries like Chart.js -->
+                <div style="width: 900px; height: 400px;">
+                    <canvas id="salesChart"></canvas>
                 </div>
+                
+                <script>
+                    let labels = ['jan','feb','mar','apr','may','jun', 'jul','aug','sep','okt','nov','dec'];
+                    
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            data: diffActualBudget,
+                
+                            backgroundColor: 'rgb(66,221,245)'
+                        }]
+                    };
+                
+                    const config = {
+                        type: 'bar',
+                        data: data
+                    };
+                
+                    const chart = new Chart (
+                        document.getElementById('salesChart'),
+                        config
+                    );            
+                </script>
             </section>
         </main>
     </div>
