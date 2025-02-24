@@ -57,32 +57,44 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <p> Here is the difference between actual sales and sales budget pr. month</p>
-                
+
                 <!-- Graphical representation (optional) -->
-                <div style="width: 900px; height: 400px;">
+                <div style="width: 900px; height: 500px;">
                     <canvas id="salesChart"></canvas>
                 </div>
-                
+
                 <script>
-                    let labels = ['jan','feb','mar','apr','may','jun', 'jul','aug','sep','okt','nov','dec'];
-                    
+                    let labels = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+
                     const data = {
                         labels: labels,
-                        datasets: [{
-                            data: diffActualBudget,
-                
-                            backgroundColor: 'rgb(66,221,245)'
-                        }]
+                        datasets: [
+                            {
+                                label: 'Difference between sales and budget',
+                                data: diffActualBudget,
+                                backgroundColor: 'rgb(66,221,245)'
+                            },
+                            {
+                                label: 'Sales',
+                                data: sales,
+                                backgroundColor: 'rgb(66,0,245)'
+                            },
+                            {
+                                label: 'Budget',
+                                data: budget,
+                                backgroundColor: 'rgb(66,0,0)'
+                            },
+                        ]
                     };
-                
+
                     const config = {
                         type: 'bar',
                         data: data
                     };
-                
-                    const chart = new Chart (
+
+                    const chart = new Chart(
                         document.getElementById('salesChart'),
                         config
                     );            
