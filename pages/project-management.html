@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project management</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="../assets/js/budgetMockup.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Financial Management</h1>
+        <p>Manage your budget efficiently</p>
+    </header>
+
+    <!-- Navigation -->
+    <div class="navbar">
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="key-metrics.html">Key metrics</a></li>
+                <li><a href="budget-vs-actual.html">Budget follow up</a></li>
+                <li><a href="forecast.html">Forecast</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="container">
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <section id="project-management">
+                <h2>Project management</h2>
+                <p>Here we follow the progress of our own project.</p>
+
+                <p>This is an overview of time spend on the project.</p>
+
+                <!-- Graphical representation (time spend) -->
+                <div style="width: 250px; height: 250px;">
+                    <canvas id="proportional-time-spend"></canvas>
+                </div>
+
+                <script>
+                    let labels = ['time spend', 'time to come'];
+                    let dataTime = [425, 2105]; 
+
+                    const dataTimeSpend = {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Proportional time spend',
+                                data: dataTime,
+                                backgroundColor: [                                    
+                                    'rgb(66,221,245)',
+                                    'rgb(229,229,229)'
+                                ],
+                            },                            
+                        ]
+                    };
+
+                    const configTimeSpend = {
+                        type: 'pie',
+                        data: dataTimeSpend
+                    };
+
+                    const chartTimeSpend = new Chart(
+                        document.getElementById('proportional-time-spend'),
+                        configTimeSpend
+                    );            
+                </script>
+                
+                
+                <!-- Graphical representation (Money spend) -->
+
+                
+                <p>This is an overview of the cost of the project so far.</p>
+
+
+                <div style="width: 250px; height: 250px;">
+                    <canvas id="money-spend"></canvas>
+                </div>
+
+                <script>
+                    let labelsMoneySpend = ['money spend'];
+
+                    const dataMoneySpend = {
+                        labels: labelsMoneySpend,
+                        datasets: [
+                            {
+                                label: 'Money spend',
+                                data: [dataTime[0]*200],
+                                backgroundColor: [
+                                    'rgb(250,140,140)'
+                                ],
+                            },                            
+                        ]
+                    };
+
+                    const configMoneySpend = {
+                        type: 'bar',
+                        data: dataMoneySpend
+                    };
+
+                    const chartMoneySpend = new Chart(
+                        document.getElementById('money-spend'),
+                        configMoneySpend
+                    );            
+                </script>
+
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Financial Management. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script src="assets/js/navigation.js"></script>
+</body>
+
+</html>
