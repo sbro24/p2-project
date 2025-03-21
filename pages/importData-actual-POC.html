@@ -13,16 +13,15 @@
         <p>Manage your budget efficiently</p>
     </header>
 
-    <div class="navbar">
-        <nav aria-label="Main Navigation">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="key-metrics.html">Key metrics</a></li>
-                <li><a href="budget-vs-actual.html">Budget follow-up</a></li>
-                <li><a href="forecast.html">Forecast</a></li>
-            </ul>
-        </nav>
-    </div>
+
+    <script src="../components/navbar.js"></script>
+    
+
+    <section> 
+    <input type="file" id="file" accept=".csv" />
+    <button id="saveButton">Save Changes</button>
+    <table id="table" border="1"></table>
+    </section>
 
     <section>
         <h2>Omsætning (Revenue)</h2>
@@ -51,7 +50,7 @@
     </section>
 
     <!-- Link the external JavaScript file -->
-    <script src="../assets/js/makeform.js"></script>
+    <script src="../assets/js/dataImporter.js"></script>
 
 </body>
 </html>
