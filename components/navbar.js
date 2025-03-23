@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <nav aria-label="Main Navigation">
                 <ul>
                     <li><a href="${basePath}index.html">Home</a></li>
-                    <li><a href="${basePath}pages/key-metrics.html">Key metrics</a></li>
+                    <li><a href="${basePath}pages/importData-actual-POC.html">Upload file</a></li>
                     <li><a href="${basePath}pages/budget-vs-actual.html">Budget follow up</a></li>
                     <li><a href="${basePath}pages/forecast.html">Forecast</a></li>
-                    <li><a href="${basePath}pages/importData-actual-POC.html">Upload file</a></li>
+                    <li><a href="${basePath}pages/key-metrics.html">Key metrics</a></li>
                 </ul>
             </nav>
         </div>
