@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <ul>
                     <li><a href="${basePath}index.html">Home</a></li>
                     <li><a href="${basePath}pages/importData-actual-POC.html">Upload file</a></li>
-                    <li><a href="${basePath}pages/budget-vs-actual.html">Budget follow up</a></li>
+                    <li><a href="${basePath}pages/budget-vs-actual.html">Budget og forecast</a></li>
                     <li><a href="${basePath}pages/forecast.html">Forecast</a></li>
-                    <li><a href="${basePath}pages/key-metrics.html">Key metrics</a></li>
+                    <li><a href="${basePath}pages/key-metrics.html">Nøgletal</a></li>
+                    <li><a href="${basePath}pages/project-management.html">Projektledelse</a></li>
                 </ul>
             </nav>
         </div>
