@@ -20,6 +20,7 @@
     <section> 
     <input type="file" id="file" accept=".csv" />
     <button id="saveButton">Save Changes</button>
+    <button id="btnManuelInput">Indtast manuelt</button>
     <table id="table" border="1"></table>
     </section>
 
@@ -49,8 +50,13 @@
         </form>
     </section>
 
+    <section id="manuelInput" style="display: none">
+        <h2>Manuel indtastning</h2>
+    </section>
+
     <!-- Link the external JavaScript file -->
     <script src="../assets/js/dataImporter.js"></script>
+    <script src="../assets/js/makeform.js"></script>
 
 </body>
 </html>

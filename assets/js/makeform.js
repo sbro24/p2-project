@@ -1,6 +1,5 @@
 let years = [2020, 2021, 2022, 2023, 2024];
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let data = [12270, 18249, 17095, 16671, 17914, 17448, 16931, 12708, 14447, 17242, 10499, 11886];
 
 function generateTable(sectionId, isExpense = false) {
     let table = document.getElementById(sectionId);
@@ -9,7 +8,7 @@ function generateTable(sectionId, isExpense = false) {
         let row = `<tr><td>${year}</td>`;
         months.forEach(month => {
             let inputName = isExpense ? `exp_${month.toLowerCase()}${year}` : `${month.toLowerCase()}${year}`;
-            row += `<td><input type='number' name='${inputName}' placeholder=${data[count]}></td>`;
+            row += `<td><input type='number' name='${inputName}' placeholder="0.00"></td>`;
             count++;
         });
         row += `</tr>`;
@@ -17,8 +16,9 @@ function generateTable(sectionId, isExpense = false) {
     });
 }
 
-// Ensure DOM is loaded before running scripts
-document.addEventListener("DOMContentLoaded", function() {
+const btnManuelInput = document.querySelector("#btnManuelInput");
+
+btnManuelInput.addEventListener("click", function() {
     generateTable("revenue-table");
     generateTable("expense-table", true);
 });
