@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="../assets/js/budgetMockup.js"></script>
+
 </head>
 
 <body>
@@ -32,46 +33,32 @@
                     Her kan du sammenligne dit eget budget med det forecast, vi har beregnet.</br>
                     Hvis der er store afvigelser skal du overveje at ændre i dit budget.
                 </p>
-
+                <table>
+                    <tr>
+                        <th>
+                            Parameter
+                        </th>
+                        <th>
+                            Forskel (total)
+                        </th>
+                        <th>
+                            Standard afvigelse
+                        </th>
+                    </tr>
+                </table>
+            </section>
+            
+            <section>
                 <!-- Graphical representation (optional) -->
-                <div style="width: 900px; height: 500px;">
-                    <canvas id="salesChart"></canvas>
-                </div>
+                 <h3>Totaler for omsætning per måned</h3>
+                <canvas id="budgetForecastChart" style="width: 900px; height: 500px;"></canvas>
+            </section>
 
-                <script>
-                    let labels = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+            <section>
+                <h3>Forskel imellem budget og forecast</h3>
+                <canvas id="diffBudgetForecastChart" style="width: 900px; height: 500px;"></canvas>
+                <script src="../assets/js/charts.js"></script>
 
-                    const data = {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: 'Difference between sales and budget',
-                                data: diffActualBudget,
-                                backgroundColor: 'rgb(66,221,245)'
-                            },
-                            {
-                                label: 'Sales',
-                                data: sales,
-                                backgroundColor: 'rgb(66,0,245)'
-                            },
-                            {
-                                label: 'Budget',
-                                data: budget,
-                                backgroundColor: 'rgb(66,0,0)'
-                            },
-                        ]
-                    };
-
-                    const config = {
-                        type: 'bar',
-                        data: data
-                    };
-
-                    const chart = new Chart(
-                        document.getElementById('salesChart'),
-                        config
-                    );            
-                </script>
             </section>
         </main>
     </div>
