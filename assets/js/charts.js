@@ -48,3 +48,15 @@ const chartDiffBudgetForecast = new Chart(
     document.getElementById('diffBudgetForecastChart'),
     configDiffBudgetForecast
 );
+
+const btnDetailsRevenue = document.querySelector("#btnDetailsRevenue");
+
+btnDetailsRevenue.addEventListener("click", () => {
+    if (btnDetailsRevenue.textContent === "Se detaljer") {
+        document.querySelector("#graphRevenueTotal").style.display = "block";
+        btnDetailsRevenue.textContent = "Fjern detaljer";
+    } else {
+        document.querySelector("#graphRevenueTotal").style.display = "none";
+        btnDetailsRevenue.textContent = "Se detaljer";
+    }
+});
