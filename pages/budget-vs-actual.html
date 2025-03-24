@@ -19,7 +19,6 @@
     </header>
 
     <!-- Navigation -->
-
     <script src="../components/navbar.js"></script>
 
     <!-- Main Layout -->
@@ -33,48 +32,25 @@
                     Her kan du sammenligne dit eget budget med det forecast, vi har beregnet.</br>
                     Hvis der er store afvigelser skal du overveje at ændre i dit budget.
                 </p>
+
                 <table>
                     <tr>
-                        <th>
-                            Parameter
-                        </th>
-                        <th>
-                            Detaljer
-                        </th>
-                        <th>
-                            Forskel (total)
-                        </th>
-                        <th>
-                            Standard afvigelse
-                        </th>
+                        <th>Parameter</th>
+                        <th>Detaljer</th>
+                        <th>Forskel (total)</th>
+                        <th>Standard afvigelse</th>
                     </tr>
                     <tr>
-                        <td>
-                            Omsætning
-                        </td>
-                        <td>
-                            <button id="btnDetailsRevenue">Se detaljer</button>
-                        </td>
-                        <td>
-                            [beregning]
-                        </td>
-                        <td>
-                            [beregning]
-                        </td>
+                        <td>Omsætning</td>
+                        <td><button id="btnDetailsRevenue">Se detaljer</button></td>
+                        <td>[beregning]</td>
+                        <td>[beregning]</td>
                     </tr>
                     <tr>
-                        <td>
-                            Omkostninger
-                        </td>
-                        <td>
-                            <button id="btnDetailsCost">Se detaljer</button>
-                        </td>
-                        <td>
-                            [beregning]
-                        </td>
-                        <td>
-                            [beregning]
-                        </td>
+                        <td>Omkostninger</td>
+                        <td><button id="btnDetailsCost">Se detaljer</button></td>
+                        <td>[beregning]</td>
+                        <td>[beregning]</td>
                     </tr>
                 </table>
             </section>
@@ -82,15 +58,16 @@
             <section id="graphRevenueTotal" style="display: none">
                 <!-- Graphical representation (optional) -->
                  <h3>Totaler for omsætning per måned</h3>
-                <canvas id="budgetForecastChart" style="width: 900px; height: 500px;"></canvas>
+                <canvas id="budgetForecastChart" style="width: 400px; height: 200px;"></canvas>
             </section>
 
             <section id="graphRevenueDifference" style="display: none">
                 <h3>Forskel imellem budget og forecast</h3>
-                <canvas id="diffBudgetForecastChart" style="width: 900px; height: 500px;"></canvas>
-                <script src="../assets/js/charts.js"></script>
-
+                <canvas id="diffBudgetForecastChart" style="width: 400px; height: 200px;"></canvas>                
             </section>
+
+            <script src="../assets/js/charts.js"></script>
+
         </main>
     </div>
 
