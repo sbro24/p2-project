@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import budget - Financial Management</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Financial Management</h1>
+        <p>Manage your budget efficiently</p>
+    </header>
+
+    <!-- Navigation -->
+    <script src="../components/navbar.js"></script>
+
+    <section> 
+        <input type="file" id="file" accept=".csv" />
+        <button id="btnManuelInputBudget">Indtast manuelt</button>
+    </section>
+    
+    <section>
+        <h2>Budget for omsætning (Revenue)</h2>
+        <form>
+            <table border="1" id="budget-revenue-table">
+                <tr>
+                    <th>Year</th>
+                    <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
+                    <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+                </tr>
+            </table>
+        </form>
+    </section>
+
+    <section>
+        <h2>Budget for omkostninger (Expenses)</h2>
+        <form>
+            <table border="1" id="budget-expense-table">
+                <tr>
+                    <th>Year</th>
+                    <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
+                    <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+                </tr>
+            </table>
+        </form>
+    </section>
+
+    <section>    
+        <button id="btnExportBudget">Eksporter budget</button>
+    </section>
+
+    <!-- Link the external JavaScript file -->
+    <script src="../assets/js/dataImporterBudget.js"></script>
+    <script src="../assets/js/makeformBudget.js"></script>
+
+
+</body>
+
+</html>
