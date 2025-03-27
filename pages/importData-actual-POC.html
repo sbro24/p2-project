@@ -4,8 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Metrics - Financial Management</title>
+    <script src="../assets/js/db.js"></script>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
+
+<section>
+    <h2>Add company name below</h2>
+    <div>
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" placeholder="Enter company name">
+        <button id="addCompanyBtn">Add Company</button>
+    </div>
+</section>
 
 <body>
     <header>
@@ -55,7 +65,8 @@
     </section>
 
     <section>    
-        <button id="saveButton">Save Changes</button>
+        <button id="exportButton">Export</button>
+        <button id="saveButton">Save changes</button>
     </section>
 
     <!-- Link the external JavaScript file -->
