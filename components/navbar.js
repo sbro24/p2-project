@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <nav aria-label="Main Navigation">
                 <ul>
                     <li><a href="${basePath}index.html">Home</a></li>
+                    <li><a href="${basePath}pages/createCompany.html">Opret virksomhed</a></li>
                     <li><a href="${basePath}pages/importData-actual-POC.html">Upload regnskabsdata</a></li>
                     <li><a href="${basePath}pages/importBudget-POC.html">Upload Budget</a></li>
                     <li><a href="${basePath}pages/forecast.html">Forecast</a></li>
