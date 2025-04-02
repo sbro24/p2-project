@@ -1,27 +1,24 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors');
 
 const app = express();
 const port = 8080;
 
-// Enhanced CORS configuration
-app.use(cors({
-  origin: ['http://localhost:5501', 'http://127.0.0.1:5501'],
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname)));
 
 // Data directory setup
 const dataDir = path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir);
 }
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // GET endpoint for fetching companies
 app.get('/api/companies', (req, res) => {
