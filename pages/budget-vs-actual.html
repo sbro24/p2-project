@@ -29,7 +29,7 @@
             <section id="budget-vs-actual">
                 <h2>Sammenligning af budget og forecast</h2>
                 <p>
-                    Her kan du sammenligne dit eget budget med det forecast, vi har beregnet.</br>
+                    Her kan du sammenligne dit eget budget med det forecast, vi har beregnet.
                     Hvis der er store afvigelser skal du overveje at ændre i dit budget.
                 </p>
 
@@ -38,35 +38,41 @@
                         <th>Parameter</th>
                         <th>Detaljer</th>
                         <th>Forskel (total)</th>
-                        <th>Standard afvigelse</th>
                     </tr>
                     <tr>
                         <td>Omsætning</td>
                         <td><button id="btnDetailsRevenue">Se detaljer</button></td>
-                        <td>[beregning]</td>
-                        <td>[beregning]</td>
+                        <td id="diffRevenueTotal"></td>
                     </tr>
                     <tr>
                         <td>Omkostninger</td>
                         <td><button id="btnDetailsCost">Se detaljer</button></td>
-                        <td>[beregning]</td>
-                        <td>[beregning]</td>
+                        <td id="diffExpensesTotal"></td>
                     </tr>
                 </table>
             </section>
             
-            <section id="graphRevenueTotal" style="display: none">
+            <section id="graphRevenueTotal" style="width: 400px; display: none">
                 <!-- Graphical representation (optional) -->
                  <h3>Totaler for omsætning per måned</h3>
-                <canvas id="budgetForecastChart" style="width: 400px; height: 200px;"></canvas>
+                <canvas id="budgetForecastChart" style="width: 100px; height: 50px;"></canvas>
             </section>
 
-            <section id="graphRevenueDifference" style="display: none">
+            <section id="graphRevenueDifference" style="width: 400px; display: none">
                 <h3>Forskel imellem budget og forecast</h3>
                 <canvas id="diffBudgetForecastChart" style="width: 400px; height: 200px;"></canvas>                
             </section>
 
-            <script src="../assets/js/charts.js"></script>
+            <section id="sectionTableBudgetForecast" style="display:none">
+                <table id="tableBudgetForecast"></table>
+            </section>
+
+            <section id="saveChangesTableBudgetForecast" style="display: none">
+                <button type="submit" id="submitAlteredBudget">Gem tilpasset budget</button>
+            </section>
+
+            <script src="../assets/js/charts.js"></script>         
+            <script src="../assets/js/budgetVsActual.js"></script>
 
         </main>
     </div>
