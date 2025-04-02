@@ -62,13 +62,25 @@ app.post('/api/save-company', (req, res) => {
         });
       }
     }
-
+// Check if a company with the specified name already exists, and if true, sets the
+    // companyData.id property to be the same ID as the object with the same name
+    const existingCompany = companies.find(c => c.name === companyData.name);
+    if (existingCompany) {
+      companyData.id = existingCompany.id;
+      companyData.createdAt = existingCompany.createdAt
+      /*
+      // May be added in future when i understand it better
+      companyData.EditedAt = new Date().toISOString();
+      */
+    } else {
     companyData.id = companies.length > 0 
       ? Math.max(...companies.map(c => c.id)) + 1 
       : 1;
-    companyData.createdAt = companyData.createdAt || new Date().toISOString();
 
+    companyData.createdAt = companyData.createdAt || new Date().toISOString();
     companies.push(companyData);
+    }
+
 
     fs.writeFile(filePath, JSON.stringify(companies, null, 2), (writeError) => {
       if (writeError) {
