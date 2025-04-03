@@ -27,6 +27,36 @@ let companyForecast = {
 
 let labels = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 
+fetch('financialMetrics.json')
+    .then(response => response.json()) // Parse JSON
+    .then(data => {
+        console.log(data); // Work with JSON data
+        // do stuff with your json data here... 
+        const dataForecastRevenue = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Forecast (Omsætning)',
+                    data: data.forecast.revenue[2025],
+                    backgroundColor: 'rgb(66,0,245)'
+                },
+            ]
+        };
+
+        const dataForecastExpenses = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Forecast (omkostninger)',
+                    data: data.forecast.expenses[2025],
+                    backgroundColor: 'rgb(66,0,0)'
+                },
+            ]
+        };
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
+
+/* 
 const dataForecastRevenue = {
     labels: labels,
     datasets: [
@@ -48,6 +78,7 @@ const dataForecastExpenses = {
         },
     ]
 };
+*/
 
 const configForecastRevenue = {
     type: 'bar',
