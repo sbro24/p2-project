@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Our Solution</title>
     <link rel="stylesheet" href="../assets/style.css">
-
+    
 </head>
 
 <body>
@@ -19,6 +19,26 @@
 <!-- Navigation -->
 <script src="../components/navbar.js"></script>
 
+<!-- Main Layout -->
+<div class="container">
+
+    <!-- Main Content Area -->
+    <main class="content">
+        <section id="create-business">
+            <h2>Opret din virkshomhed</h2>
+            <p>
+                På denne side kan du oprette din virksomhed.
+            </p>
+            <form id="company_name_id">
+                <fieldset>
+                 <div class="form">
+                    <label for="name_id"> Virksomheden's navn:</label>
+                    <input type="text" name="name" id="name_id" value="" required minlength="1" maxlength="50">
+                    <input type="submit" name="btn" id="company_btn_id" value="Submit">
+                </fieldset>
+            </form>
+        </section>
+    <script src="../assets/js/createCompany.js"></script>
 </body>
 
 </html>
