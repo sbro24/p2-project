@@ -50,20 +50,21 @@ class ArimaForecast():
     # Generates the forecast, using the ARIMA model
     def get_forecast(self):
         forecastdata = { 
-        "forecastrevenue": {}, #{"2025": [16800, 19950, 23100, 27300, 30450, 35700, 32550, 31500, 29400, 25200, 22050, 18900]},
-        "forecastexpenses": {} #{"2025": [10500, 11550, 12600, 13650, 14700, 17850, 16800, 15750, 14700, 13650, 12600, 11550]}
+        "revenue": {}, #{"2025": [16800, 19950, 23100, 27300, 30450, 35700, 32550, 31500, 29400, 25200, 22050, 18900]},
+        "expenses": {} #{"2025": [10500, 11550, 12600, 13650, 14700, 17850, 16800, 15750, 14700, 13650, 12600, 11550]}
         }
 
         """start_params = [0.1, 0.05, 0.1, 1.0]
         if self.d == 0:
             start_params = [0.1, 0.05, 0.1, 0.0, 1.0]"""
+        
         for key in self.data:
             model = ARIMA(self.data[key]["numbers"], order=(2, self.data[key]["d"], 1)) # needs p and q functions
             fitted_model = model.fit() #start_params=start_params
             forecast = fitted_model.forecast(steps=self.steps)
             forecast_values = [int(value) for value in forecast.values.tolist()]
             print(forecast)
-            forecastdata[f"forecast{key}"][f"{str(forecast.index[0]).split('-')[0]}"] = forecast_values
+            forecastdata[key][f"{str(forecast.index[0]).split('-')[0]}"] = forecast_values
         return forecastdata
     
     # Loads and formats data to a workable shape
@@ -84,9 +85,9 @@ class ArimaForecast():
             value_array = []
             year_array = []
             index_array =[]
-            for a in dict[key]:
+            for a in dict["data"]["result"][key]:
                 year_array.append(a)
-                value_array = value_array + dict[key][a]
+                value_array = value_array + dict["data"]["result"][key][a]
             month = 0
             year = 0
             # format data
@@ -105,7 +106,7 @@ class ArimaForecast():
             ds = json.load(f)
             dict = ds[0]
             for key in forecastdata:
-                dict[key] = forecastdata[key]
+                dict["data"]["forecast"][key] = forecastdata[key]
             f.close
             with open(self.path, 'w', encoding='utf-8-sig') as f:    
                 json.dump([dict], f, ensure_ascii=False, indent=2)
