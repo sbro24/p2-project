@@ -35,6 +35,17 @@ app.get('/api/companies', (req, res) => {
   }
 });
 
+app.get('/api/metrics', (req, res) => {
+  try {
+    const filePath = path.join(dataDir, "financialMetrics.json");
+    const companiesData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    res.json(companiesData);
+  } catch (error) {
+    console.error('Error fetching companies:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // POST endpoint for saving companies
 app.post('/api/save-company', (req, res) => {
   try {
@@ -135,6 +146,7 @@ app.post('/api/save-metrics', (req, res) => {
     });
   }
 });
+
 
 // Start server
 app.listen(port, () => {
