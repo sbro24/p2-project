@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 // Data directory setup
-const dataDir = path.join(__dirname, 'data');
+const dataDir = path.join(__dirname, 'assets', 'Database');
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir);
 }
