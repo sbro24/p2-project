@@ -30,7 +30,6 @@ function calcYearlyDiffToTable(data) {
     let yearlyDiffExpenses = calcYearlyTotal(data.budget.expenses[year]) - calcYearlyTotal(data.forecast.expenses[year]);
     document.getElementById("diffExpensesTotal").textContent = yearlyDiffExpenses;
 
-
 }
 
 function calcYearlyTotal(data) {
@@ -42,37 +41,3 @@ function calcYearlyTotal(data) {
 }
 
 fetchData();
-
-
-
-
-
-
-
-// table (not done yet)
-
-let years = [2025];
-let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-function generateTable(sectionId, isExpense = false) {
-    let table = document.getElementById(sectionId);
-    let count = 0;
-    years.forEach(year => {
-        let row = `<tr><td>${year}</td>`;
-        months.forEach(month => {
-            let inputName = isExpense ? `exp_${month.toLowerCase()}${year}` : `${month.toLowerCase()}${year}`;
-            row += `<td><input type='number' name='${inputName}' placeholder="0.00"></td>`;
-            count++;
-        });
-        row += `</tr>`;
-        table.innerHTML += row;
-    });
-}
-
-generateTable("tableBudgetForecast");
-
-let tableBudgetForecast = document.getElementById("tableBudgetForecast");
-
-tableBudgetForecast.addEventListener("input", function(){
-    document.getElementById("saveChangesTableBudgetForecast").style.display = "block";
-} );

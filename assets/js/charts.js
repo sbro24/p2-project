@@ -49,18 +49,3 @@ const chartDiffBudgetForecast = new Chart(
     configDiffBudgetForecast
 );
 
-const btnDetailsRevenue = document.querySelector("#btnDetailsRevenue");
-
-btnDetailsRevenue.addEventListener("click", () => {
-    if (btnDetailsRevenue.textContent === "Se detaljer") {
-        document.querySelector("#graphRevenueTotal").style.display = "block";
-        document.querySelector("#graphRevenueDifference").style.display = "block";
-        document.querySelector("#sectionTableBudgetForecast").style.display = "block"
-        btnDetailsRevenue.textContent = "Fjern detaljer";
-    } else {
-        document.querySelector("#graphRevenueTotal").style.display = "none";
-        document.querySelector("#graphRevenueDifference").style.display = "none";
-        document.querySelector("#sectionTableBudgetForecast").style.display = "none"        
-        btnDetailsRevenue.textContent = "Se detaljer";
-    }
-});
