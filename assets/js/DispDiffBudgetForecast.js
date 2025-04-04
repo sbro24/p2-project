@@ -8,6 +8,7 @@ const btnDetailsRevenue = document.querySelector("#btnDetailsRevenue");
 
 document.getElementById("submitAlteredBudget").addEventListener("click", () => {
     saveToServer();
+    generateCharts();
 });
 
 btnDetailsRevenue.addEventListener("click", () => {
@@ -47,6 +48,7 @@ function fetchData() {
                     displayDataInTable(companyData.data);
                 }
             }
+            generateCharts();
         })
         .catch((error) => {
             console.error("Fetch error:", error);
@@ -191,6 +193,72 @@ function getTableData(rowId) {
         return isNaN(value) ? 0 : value;
     });
 }
+
+function generateCharts(){
+
+    let companyData = dataMetrics.find(item => item.companyId === currentCompanyId);
+
+    console.log(companyData);
+
+
+    let forecastRevenue = companyData.data.forecast.revenue["2025"];
+    let budgetRevenue = companyData.data.budget.revenue["2025"];
+    let diffBudgetForecastRevenue = [];
+
+    for (let i = 0; i<12; i++) {
+        diffBudgetForecastRevenue[i] = budgetRevenue[i] - forecastRevenue[i];
+    };
+
+    let labels = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+
+    const dataBudgetForecast = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Forecast (Omsætning)',
+                data: forecastRevenue,
+                backgroundColor: 'rgb(66,0,245)'
+            },
+            {
+                label: 'Budget (omsætning)',
+                data: budgetRevenue,
+                backgroundColor: 'rgb(66,0,0)'
+            },
+        ]
+    };
+    
+    const dataDiffBudgetForecast = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Difference between sales and budget',
+                data: diffBudgetForecastRevenue,
+                backgroundColor: 'rgb(66,221,245)'
+            },
+        ]
+    };
+    
+    const configBudgetForecast = {
+        type: 'bar',
+        data: dataBudgetForecast
+    };
+    
+    const configDiffBudgetForecast = {
+        type: 'line',
+        data: dataDiffBudgetForecast
+    };
+    
+    const chartBudgetForecast = new Chart(
+        document.getElementById('budgetForecastChart'),
+        configBudgetForecast
+    );            
+    
+    const chartDiffBudgetForecast = new Chart(
+        document.getElementById('diffBudgetForecastChart'),
+        configDiffBudgetForecast
+    );
+}
+
 
 // Initialize
 fetchData();
