@@ -3,30 +3,24 @@ const API_BASE_URL = 'http://localhost:8080';
 const company = {
     id: null, // Will be set when saving to server
     name: "", // Will be set from the input field
-    revenue: [], // Array to store revenue data for each year
-    expenses: [] // Array to store expenses data for each year
+    data: {},  // Array to store forecast data for each year
 };
+
+let companyNameInput;
 
 // Wait for DOM to load before attaching events
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('company_name_id');
-    
+    companyNameInput = document.getElementById('name_id');
+
     // Attach form submission handler
     form.addEventListener('submit', formSubmitHandler);
 });
 
 function formSubmitHandler(event) {
     event.preventDefault();
-    const companyName = document.getElementById("name_id").value;
-    if (companyName) {
-        alert("Virksomhed oprettet: " + companyName);
-    } else {
-        alert("Indtast venligst et virksomhedsnavn.");
-        return;
-    }
-    
-    company.name = companyName;
-
+    company.name = document.getElementById("name_id").value;
+    alert("Virksomhed oprettet: " + company.name);
     saveToServer();
 }
     
@@ -34,14 +28,10 @@ function formSubmitHandler(event) {
      * Saves data to the server in JSON format
      */
  async function saveToServer() {
-    if (!company.name) {
-        alert('Please enter a company name');
-        companyNameInput.focus();
-        return;
-    }
+    //updateCompanyDataFromTables();
 
-    updateCompanyDataFromTables();
-
+    company.data = buildTableData();
+    console.log(company)
     try {
         // Save company - with response validation
         const companyResponse = await fetch(`${API_BASE_URL}/api/save-company`, {
@@ -81,10 +71,7 @@ function formSubmitHandler(event) {
             },
             body: JSON.stringify({
                 companyId: company.id,
-                companyName: company.name,
-                revenue: company.revenue,
-                expenses: company.expenses,
-                updatedAt: new Date().toISOString()
+                data: company.data,
             })
         });
 
@@ -102,35 +89,36 @@ function formSubmitHandler(event) {
         alert(`Error saving data: ${error.message}`);
     }
 }
+
 /**
- * Updates the company object with current table data
+ * Builds table data structure without HTML tables
+ * returns {Array} Data in same format as old getTableData()
  */
-function updateCompanyDataFromTables() {
-    company.revenue = getTableData('revenue-table');
-    company.expenses = getTableData('expense-table');
-    console.log("Updated company data:", company);
+function buildTableData() {
+    // Creates array with same structure as old HTML-scraped data
+    return {
+        result: {
+            revenue: createEmptyYearData(5, 2020),
+            expenses: createEmptyYearData(5, 2020)
+        },
+        budget: {
+            revenue: createEmptyYearData(6, 2020),
+            expenses: createEmptyYearData(6, 2020)
+        },
+        forecast: {
+            revenue: createEmptyYearData(1, 2025),
+            expenses: createEmptyYearData(1, 2025)
+        }
+    };
+
 }
 
-/**
- * Extracts data from a table
- * @param {string} tableId - The ID of the table to extract from
- * @returns {Array} The extracted data
- */
+function createEmptyYearData(yearCount, startYear) {
+    const result = {};
 
-function getTableData(tableId) {
-    const table = document.getElementById(tableId);
-    const rows = table.querySelectorAll('tr');
-    const data = [];
-    
-    // Skip header row (index 0)
-    for (let i = 1; i < rows.length; i++) {
-        const cells = rows[i].querySelectorAll('td');
-        if (cells.length > 0) {
-            data.push({
-                year: cells[0].textContent.trim(),
-                monthlyData: Array.from(cells).slice(1).map(c => c.textContent.trim())
-            });
-        }
+    for (let i = 0; i < yearCount; i++) {
+        result[(startYear + i).toString()] = new Array(12).fill(0);
     }
-    return data;
+    
+    return result;
 }
