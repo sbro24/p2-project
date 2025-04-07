@@ -148,6 +148,24 @@ app.post('/api/save-metrics', (req, res) => {
 });
 
 
+app.post('/api/save-metrics-post', (req, res) => {
+  try {
+    let allMetrics = req.body;
+    const filePath = path.join(dataDir, 'financialMetrics.json');  
+
+
+    fs.writeFileSync(filePath, JSON.stringify(allMetrics, null, 2));
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Server error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+
 // Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

@@ -56,7 +56,8 @@
     // Event listener for save button - handles saving to server
     saveButton.addEventListener('click', function () {
         // This function saves data to the server in JSON format
-        saveToServer();
+        // saveToServer();
+        EditResultData();
     });
 
     // Event listener for company name changes
@@ -255,6 +256,25 @@
         }
     
         updateCompanyDataFromTables();
+
+        (function fetchData() {
+            fetch("/api/companies")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    CheckIfNameExists(data[i].name);
+                })
+                .catch((error) => {
+                    console.error("Fetch error:", error);
+                    const p = document.createElement("p");
+                    p.textContent = `Error: ${error.message}`;
+                    document.getElementById("TestafData").appendChild(p);
+                });
+        }());
     
         try {
             // Save company - with response validation
@@ -316,6 +336,22 @@
             alert(`Error saving data: ${error.message}`);
         }
     }
+
+    function EditResultData() {
+        if (!company.name) {
+            alert('Please enter a company name');
+            companyNameInput.focus();
+            return;
+        }
+
+        updateCompanyDataFromTables();
+
+        fetchDataCompany();
+        
+        fetchDataMetrics();
+             
+}
+
     /**
      * Updates the company object with current table data
      */
@@ -325,6 +361,108 @@
         console.log("Updated company data:", company);
     }
 
+    //Parses the data from the JSON file with the company financial metrics and
+    //runs it through the "CheckIfIDExists" function
+    function fetchDataMetrics() {
+        fetch("/api/metrics")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                CheckIfIDExists(data);
+                try {
+                    // Make the POST request using fetch
+                    fetch(`/api/save-metrics-post`, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    
+                    });
+                /*
+                    // If the response is not OK, throw an error
+                    if (!metricsResponse.ok) {
+                        const error = metricsResponse.json();
+                        throw new Error(error.error || 'Failed to save metrics');
+                    }
+                
+                    // Parse the JSON response from the server
+                    const metricsResult = metricsResponse.json();
+                    
+                    // If everything is fine, show success message and log the result
+                    alert('Data successfully saved!');
+                    console.log('Saved data:', { company: companyResult, metrics: metricsResult });
+                    */
+                    alert('Data successfully saved!');
+                } catch (error) {
+                    // Handle any errors that occur during the fetch or response handling
+                    console.error('Save error:', error);
+                    alert(`Error saving data: ${error.message}`);
+                }
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+                const p = document.createElement("p");
+                p.textContent = `Error: ${error.message}`;
+                document.getElementById("TestafData").appendChild(p);
+            });
+};
+
+    //Scans the JSON file containing company financial data for a matching ID to the 
+    //entered company name and updates it with the new data.
+    function CheckIfIDExists(data) {
+        for (i=0; i<data.length; i++) {
+            if (data[i].companyId === company.id) {
+                for (l=0, f=5; l < f; l++) {
+                data[i].data.result.revenue[2020+l] = company.revenue[l].monthlyData;
+                data[i].data.result.expenses[2020+l] = company.expenses[l].monthlyData;
+                }
+            }
+        }
+    };
+    
+    //Parses the JSON file containing each previously added company and runs it through
+    //the "CheckIfNameExists" function.
+    function fetchDataCompany() {
+            fetch('/api/companies')
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    CheckIfNameExists(data);
+                })
+                .catch((error) => {
+                    console.error("Fetch error:", error);
+                    const p = document.createElement("p");
+                    p.textContent = `Error: ${error.message}`;
+                    document.getElementById("TestafData").appendChild(p);
+                });
+        };
+
+
+    //Check if an identical name has already been logged in the database, and copy its
+    //ID into the company object to later access data tied to the ID
+    function CheckIfNameExists(data) {
+        for (i=0; i<data.length; i++) {
+            
+            if (data[i].name === company.name) {
+                company.id = data[i].id;
+            } 
+        }
+        return company;
+        };
+
+    
+
+        
     /**
      * Extracts data from a table
      * @param {string} tableId - The ID of the table to extract from
@@ -347,7 +485,7 @@
             }
         }
         return data;
-    }
+    };
 
     // ========================================================================
     // CSV EXPORT FUNCTION
