@@ -1,5 +1,7 @@
 'use strict'
 
+let dataFormat = Intl.NumberFormat("dk", {style: "currency", currency:"DKK"});
+
 function fetchData() {
     fetch("/api/metrics")
         .then((response) => {
@@ -25,11 +27,11 @@ function calcYearlyDiffToTable(data) {
     let year = "2025";
     
     let yearlyDiffRevenue = calcYearlyTotal(data.budget.revenue[year]) - calcYearlyTotal(data.forecast.revenue[year]);
-    document.getElementById("diffRevenueTotal").textContent = yearlyDiffRevenue;
+    document.getElementById("diffRevenueTotal").textContent = dataFormat.format(yearlyDiffRevenue);
 
     let yearlyDiffExpenses = calcYearlyTotal(data.budget.expenses[year]) - calcYearlyTotal(data.forecast.expenses[year]);
-    document.getElementById("diffExpensesTotal").textContent = yearlyDiffExpenses;
 
+    document.getElementById("diffExpensesTotal").textContent = dataFormat.format(yearlyDiffExpenses);
 }
 
 function calcYearlyTotal(data) {
