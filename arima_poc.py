@@ -101,15 +101,19 @@ class ArimaForecast():
             data[key]["numbers"]=series
         return data
     
-    def upload_json(self, forecastdata):
+    def upload_json(self, forecastdata, id):
         with open(self.path, 'r', encoding='utf-8-sig') as f:    
             ds = json.load(f)
-            dict = ds[0]
-            for key in forecastdata:
-                dict["data"]["forecast"][key] = forecastdata[key]
+            count = 0
+            for a in ds:
+                if id in ds[count]:
+                    for key in forecastdata:
+                        ds[count]["data"]["forecast"][key] = forecastdata[key]
+                else:
+                    count +=1
             f.close
             with open(self.path, 'w', encoding='utf-8-sig') as f:    
-                json.dump([dict], f, ensure_ascii=False, indent=2)
+                json.dump(ds, f, ensure_ascii=False, indent=2)
                 f.close
 
 # a standard python convention
@@ -126,17 +130,17 @@ if __name__ == "__main__":
     path = args.path
     company = args.company
 
-    """ 
-    path = f'{os.getcwd()}\\p2-project\\assets\\Database\\financialMetrics.json'
+   
+    path = f'{os.getcwd()}\\p2-project\\assets\\Database\\financialMetrics2.json'
     steps = 12
     company = 1
 
-    """
+    
 
     # main
     m = ArimaForecast(path=path, steps=steps, id=company)
     forecast = m.get_forecast()
-    m.upload_json(forecast)
+    m.upload_json(forecast, company)
 
 
 
