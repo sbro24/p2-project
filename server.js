@@ -35,6 +35,7 @@ app.get('/api/companies', (req, res) => {
   }
 });
 
+// GET endpoint for fetching financial metrics
 app.get('/api/metrics', (req, res) => {
   try {
     const filePath = path.join(dataDir, "financialMetrics.json");
@@ -73,7 +74,8 @@ app.post('/api/save-company', (req, res) => {
         });
       }
     }
-// Check if a company with the specified name already exists, and if true, sets the
+
+    // Check if a company with the specified name already exists, and if true, sets the
     // companyData.id property to be the same ID as the object with the same name
     const existingCompany = companies.find(c => c.name === companyData.name);
     if (existingCompany) {
@@ -116,7 +118,7 @@ app.post('/api/save-company', (req, res) => {
   }
 });
 
-// POST endpoint for saving metrics
+// POST endpoint for saving metrics WITH comparison of existing company ID with input
 app.post('/api/save-metrics', (req, res) => {
   try {
     const metricsData = req.body;
@@ -135,6 +137,24 @@ app.post('/api/save-metrics', (req, res) => {
     } else {
       allMetrics.push(metricsData);
     }
+
+    fs.writeFileSync(filePath, JSON.stringify(allMetrics, null, 2));
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Server error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+// POST endpoint for saving financial metrics WITHOUT comparison of company ID
+app.post('/api/save-metrics-post', (req, res) => {
+  try {
+    let allMetrics = req.body;
+    const filePath = path.join(dataDir, 'financialMetrics.json');  
+
 
     fs.writeFileSync(filePath, JSON.stringify(allMetrics, null, 2));
     res.json({ success: true });
