@@ -245,98 +245,8 @@
     // SERVER COMMUNICATION FUNCTIONS
     // ========================================================================
 
-    /**
-     * Saves data to the server in JSON format
-     */
-    async function saveToServer() {
-        if (!company.name) {
-            alert('Please enter a company name');
-            companyNameInput.focus();
-            return;
-        }
     
-        updateCompanyDataFromTables();
-
-        (function fetchData() {
-            fetch("/api/companies")
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    CheckIfNameExists(data[i].name);
-                })
-                .catch((error) => {
-                    console.error("Fetch error:", error);
-                    const p = document.createElement("p");
-                    p.textContent = `Error: ${error.message}`;
-                    document.getElementById("TestafData").appendChild(p);
-                });
-        }());
-    
-        try {
-            // Save company - with response validation
-            const companyResponse = await fetch(`${API_BASE_URL}/api/save-company`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ 
-                    name: company.name,
-                    createdAt: new Date().toISOString() 
-                })
-            });
-    
-            // First check if we got any response at all
-            if (!companyResponse.ok) {
-                const error = await companyResponse.json();
-                throw new Error(error.error || 'Failed to save company');
-            }
-    
-            const companyResult = await companyResponse.json();
-            company.id = companyResult.company.id;
-    
-            // Then check if the response indicates success
-            if (!companyResponse.ok || !companyResult.success) {
-                throw new Error(companyResult.error || 'Failed to save company');
-            }
-    
-            company.id = companyResult.company.id;
-    
-            // Save metrics
-            const metricsResponse = await fetch(`${API_BASE_URL}/api/save-metrics`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    companyId: company.id,
-                    companyName: company.name,
-                    revenue: company.revenue,
-                    expenses: company.expenses,
-                    updatedAt: new Date().toISOString()
-                })
-            });
-
-            const metricsResult = await metricsResponse.json();
-            
-              if (!metricsResponse.ok) {
-            const error = await metricsResponse.json();
-            throw new Error(error.error || 'Failed to save metrics');
-        }
-    
-            alert('Data successfully saved!');
-            console.log('Saved data:', { company: companyResult, metrics: metricsResult });
-        } catch (error) {
-            console.error('Save error:', error);
-            alert(`Error saving data: ${error.message}`);
-        }
-    }
-
+    // Saves data to the server in JSON format
     function EditResultData() {
         if (!company.name) {
             alert('Please enter a company name');
@@ -349,8 +259,8 @@
         fetchDataCompany();
         
         fetchDataMetrics();
-             
-}
+
+    };
 
     /**
      * Updates the company object with current table data
@@ -359,7 +269,7 @@
         company.revenue = getTableData('revenue-table');
         company.expenses = getTableData('expense-table');
         console.log("Updated company data:", company);
-    }
+    };
 
     //Parses the data from the JSON file with the company financial metrics and
     //runs it through the "CheckIfIDExists" function
@@ -411,7 +321,7 @@
                 p.textContent = `Error: ${error.message}`;
                 document.getElementById("TestafData").appendChild(p);
             });
-};
+    };
 
     //Scans the JSON file containing company financial data for a matching ID to the 
     //entered company name and updates it with the new data.
@@ -429,23 +339,23 @@
     //Parses the JSON file containing each previously added company and runs it through
     //the "CheckIfNameExists" function.
     function fetchDataCompany() {
-            fetch('/api/companies')
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    CheckIfNameExists(data);
-                })
-                .catch((error) => {
-                    console.error("Fetch error:", error);
-                    const p = document.createElement("p");
-                    p.textContent = `Error: ${error.message}`;
-                    document.getElementById("TestafData").appendChild(p);
-                });
-        };
+        fetch('/api/companies')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                CheckIfNameExists(data);
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+                const p = document.createElement("p");
+                p.textContent = `Error: ${error.message}`;
+                document.getElementById("TestafData").appendChild(p);
+        });
+    };
 
 
     //Check if an identical name has already been logged in the database, and copy its
@@ -458,7 +368,7 @@
             } 
         }
         return company;
-        };
+    };
 
     
 
