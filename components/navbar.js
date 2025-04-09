@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <li><a href="${basePath}pages/createCompany.html">Opret virksomhed</a></li>
                     <li><a href="${basePath}pages/importData-actual-POC.html">Upload regnskabsdata</a></li>
                     <li><a href="${basePath}pages/importBudget-POC.html">Upload Budget</a></li>
+                    <li><a href="${basePath}pages/calcForecast.html">Beregn forecast</a></li>
                     <li><a href="${basePath}pages/forecast.html">Forecast</a></li>
                     <li><a href="${basePath}pages/budget-vs-actual.html">Budget og forecast</a></li>
                     <li><a href="${basePath}pages/project-management.html">Projektledelse</a></li>
