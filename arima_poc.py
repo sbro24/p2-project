@@ -106,9 +106,10 @@ class ArimaForecast():
             ds = json.load(f)
             count = 0
             for a in ds:
-                if id in ds[count]:
+                if a["companyId"] == id:
                     for key in forecastdata:
                         ds[count]["data"]["forecast"][key] = forecastdata[key]
+                    break
                 else:
                     count +=1
             f.close
@@ -131,11 +132,11 @@ if __name__ == "__main__":
     company = args.company
 
    
-    """ 
+
     path = f'{os.getcwd()}\\p2-project\\assets\\Database\\financialMetrics2.json'
     steps = 12
     company = 1
-    """
+  
     
 
     # main
