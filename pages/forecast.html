@@ -7,9 +7,18 @@
     <title>Forecast - Financial Management</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/js/forecast.js"></script>
 </head>
 
 <body>
+    <section>
+        <h2>Add company name below</h2>
+        <div>
+            <label for="companyName">Company Name:</label>
+            <input type="text" id="companyName" placeholder="Enter company name">
+            <button id="companyForecastBtn">Forcast Company</button>
+        </div>
+    </section>
     <!-- Header -->
     <header>
         <h1>Financial Management</h1>
@@ -21,13 +30,14 @@
 
     <section id="sectionForecastRevenue" style="width: 400px">
         <h3>Forecast på omkostninger</h3>
+        <canvas id="forecast-revenue" style="display: block; width: 250px; height: 125px;" width="250" height="125"></canvas>
     </section>
 
     <section id="sectionForecastExpenses" style="width: 400px">
         <h3>Forecast på udgifter</h3>
+        <canvas id="forecast-expenses" style="display: block; width: 250px; height: 125px;" width="250" height="125"></canvas>
     </section>
 
-    <script src="../assets/js/forecast.js"></script>
 
     <!-- Footer -->
     <footer>

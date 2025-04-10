@@ -3,7 +3,7 @@ const API_BASE_URL = 'http://localhost:8080';
 const company = {
     id: null, // Will be set when saving to server
     name: "", // Will be set from the input field
-    data: {},  // Array to store forecast data for each year
+    data: {},  // Array to store data for each year
 };
 
 let companyNameInput;
@@ -17,8 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', formSubmitHandler);
 });
 
+// handles form submission
 function formSubmitHandler(event) {
     event.preventDefault();
+    // Set the name to be the value of the input field
     company.name = document.getElementById("name_id").value;
     alert("Virksomhed oprettet: " + company.name);
     saveToServer();
@@ -90,12 +92,9 @@ function formSubmitHandler(event) {
     }
 }
 
-/**
- * Builds table data structure without HTML tables
- * returns {Array} Data in same format as old getTableData()
- */
+// Builds table data structure, and returns several arrays filled with zeros 
 function buildTableData() {
-    // Creates array with same structure as old HTML-scraped data
+    // Creates arrays ready to be sent to a JSON file
     return {
         result: {
             revenue: createEmptyYearData(5, 2020),
@@ -113,6 +112,7 @@ function buildTableData() {
 
 }
 
+// Creates an object with years as keys and arrays of zeros as values
 function createEmptyYearData(yearCount, startYear) {
     const result = {};
 

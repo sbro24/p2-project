@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
 const app = express();
 const port = 8080;
@@ -45,6 +46,16 @@ app.get('/api/metrics', (req, res) => {
     console.error('Error fetching companies:', error);
     res.status(500).json({ error: error.message });
   }
+});
+
+app.get('/api/calcForecast', (req, res) => {
+  console.log("test af side");
+  
+  exec(`python arima_poc.py --company 1`, (error, stdout, stderr) => {
+    console.log(`Script output: ${stdout}`);
+    console.log(error);
+    console.log(stderr);
+  });
 });
 
 // POST endpoint for saving companies
