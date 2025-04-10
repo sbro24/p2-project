@@ -131,12 +131,11 @@ if __name__ == "__main__":
     path = args.path
     company = args.company
 
-   
-
+    """
     path = f'{os.getcwd()}\\p2-project\\assets\\Database\\financialMetrics2.json'
     steps = 12
     company = 1
-  
+    """
     
 
     # main
